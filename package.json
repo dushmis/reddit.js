@@ -1,0 +1,21 @@
+{
+  "name": "reddit.js",
+  "version": "0.0.0",
+  "description": "reddit package for nodejs",
+  "main": "reddit.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dushmis/reddit.js.git"
+  },
+  "keywords": [
+    "reddit"
+  ],
+  "author": "dushyantbing",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/dushmis/reddit.js/issues"
+  }
+}
