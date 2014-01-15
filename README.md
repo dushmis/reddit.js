@@ -7,7 +7,7 @@ Usage
 -------
 
 `
-(new reddit({limit:5})).get("stories", function(e) {
-  console.log(e);//print stuff
+(new reddit({limit:5})).get("stories", function(err,data) {
+  console.log(data);
 });
 `
