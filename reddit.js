@@ -32,8 +32,6 @@
               if (resp && resp.data) {
                 callback(undefined, resp.data);
               }
-            } else {
-              console.log("pass something");
             }
           } else {
             if (!(typeof callback === "undefined") && typeof callback === "function") {
