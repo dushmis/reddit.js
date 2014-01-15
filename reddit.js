@@ -18,7 +18,7 @@
         url = url + "&after=" + default_settings.next;
       }
       if (typeof url === "undefined") {
-        return undefined;
+        //this is impossible.
       }
       http.get(url, function(res) {
         var body = "";
