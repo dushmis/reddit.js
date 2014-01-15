@@ -34,23 +34,23 @@ var default_settings={
           //console.log(res);
           if(res.statusCode=="200"){
           var resp = JSON.parse(body)
-            if(! (typeof callback === 'undefined') ){
-              //callback(resp,response,wh,ne,limit);
+            if(! (typeof callback === 'undefined') && (typeof callback==="function")){
               if(resp && resp.data){
-                callback(resp.data);
+                callback(undefined,resp.data);
               }
             }else{
               console.log("pass something");
             }
           }else{
-            console.log("not found");
+             if(! (typeof callback === 'undefined') && (typeof callback==="function")){
+                callback({message:"Undefined location"},undefined);
+            }
           }
         });
       }).on('error', function(e) {
-          console.log("Got error: ", e);
+          callback(e,undefined);
       });
     }
-    
     return reddit;
   })();
   
