@@ -3,7 +3,8 @@ reddit.js
 
 reddit json feed reader for nodejs
 
-Usage::
+Usage
+-------
 
 (new reddit({limit:5})).get("stories", function(e) {
   console.log(e);//print stuff
