@@ -10,7 +10,7 @@
       default_settings.next = settings.next;
     }
     reddit.prototype.get = function(url, callback) {
-      url = "http://www.reddit.com/r/" + url + "/.json";
+      url = ("http:") + "//" + "www." + "reddit." + "com" + "/r/" + url + "/.json";
       if (default_settings.limit) {
         url = url + "?limit=" + default_settings.limit;
       }
