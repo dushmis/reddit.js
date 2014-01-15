@@ -1,6 +1,7 @@
 var reddit = require("./reddit");
 var cons = require("./cons");
 
+<<<<<<< HEAD
 var acallback=function(err,data) {
 	if (!err) {
 		displayContent(data.data.children);
@@ -17,3 +18,12 @@ var displayContent = function(children){
 
 (new reddit({limit:5})).get("stories", acallback);
 //console.log(cons);
+=======
+(new reddit({limit:5})).get("stories", function(err,data) {
+	if (err) {
+		console.log(err);
+	}else{
+		console.log(data);
+	}
+});
+>>>>>>> d72d6a56cc8baa8368a01e5726e33bb3014164d5
