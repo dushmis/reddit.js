@@ -13,6 +13,9 @@
     reddit.prototype.get_feed = reddit.prototype.get;
 
     reddit.prototype.get = function(url, callback) {
+      if (typeof url === "undefined") {
+        callback && callback({message:"Undefined location"}, undefined);
+      }
       default_settings.what=url;
       url = ("http:") + "//" + "www." + "reddit." + "com" + "/r/" + url + "/.json";
       if (default_settings.limit) {
@@ -20,9 +23,6 @@
       }
       if (default_settings.next) {
         url = url + "&after=" + default_settings.next;
-      }
-      if (typeof url === "undefined") {
-        //this is impossible.
       }
 
       http.get(url, function(res) {
@@ -33,21 +33,17 @@
         res.on("end", function() {
           if (res.statusCode == "200") {
             var resp = JSON.parse(body);
-            if (typeof callback === "function") {
-              if (resp && resp.data) {
-                rdata = new redditData(resp.data);
-                rdata.settings=default_settings;
-                callback(undefined, rdata);
-              }
+            if (resp && resp.data) {
+              rdata = new redditData(resp.data);
+              rdata.settings=default_settings;
+              callback && callback(null, rdata);
             }
           } else {
-            if (typeof callback === "function") {
-              callback({message:"Undefined location"}, undefined);
-            }
+              callback && callback({message:"Undefined location"}, null);
           }
         });
       }).on("error", function(e) {
-        callback(e, undefined);
+        callback(e, null);
       });
 
     };
@@ -56,3 +52,4 @@
 
   module.exports = reddit;
 }).call(this);
+
