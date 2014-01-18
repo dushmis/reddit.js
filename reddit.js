@@ -1,9 +1,8 @@
 (function() {
   var http = require("http");
-  var express = require("express");
   var logfmt = require("logfmt");
   var redditData = require("./rdata");
-  var app = express();
+  var rperm = require("./rperm");
   var default_settings = {limit:5};
   reddit = function() {
     function reddit(settings) {
@@ -11,20 +10,18 @@
       default_settings.next = settings.next;
     }
     reddit.prototype.get_feed = reddit.prototype.get;
-
     reddit.prototype.get = function(url, callback) {
-      default_settings.what=url;
-      url = ("http:") + "//" + "www." + "reddit." + "com" + "/r/" + url + "/.json";
+      if (typeof url === "undefined") {
+        callback && callback({message:"Undefined location"}, undefined);
+      }
+      default_settings.what = url;
+      url = "http:" + "//" + "www." + "reddit." + "com" + "/r/" + url + "/.json";
       if (default_settings.limit) {
         url = url + "?limit=" + default_settings.limit;
       }
       if (default_settings.next) {
         url = url + "&after=" + default_settings.next;
       }
-      if (typeof url === "undefined") {
-        //this is impossible.
-      }
-
       http.get(url, function(res) {
         var body = "";
         res.on("data", function(chunk) {
@@ -33,26 +30,23 @@
         res.on("end", function() {
           if (res.statusCode == "200") {
             var resp = JSON.parse(body);
-            if (typeof callback === "function") {
-              if (resp && resp.data) {
-                rdata = new redditData(resp.data);
-                rdata.settings=default_settings;
-                callback(undefined, rdata);
-              }
+            if (resp && resp.data) {
+              resp.data.children.forEach(function(result) {
+                result.data.permalink = new rperm("http://www.reddit.com" + result.data.permalink + ".json");
+              });
+              rdata = new redditData(resp.data);
+              rdata.settings = default_settings;
+              callback && callback(null, rdata);
             }
           } else {
-            if (typeof callback === "function") {
-              callback({message:"Undefined location"}, undefined);
-            }
+            callback && callback({message:"Undefined location"}, null);
           }
         });
       }).on("error", function(e) {
-        callback(e, undefined);
+        callback(e, null);
       });
-
     };
     return reddit;
   }();
-
   module.exports = reddit;
 }).call(this);
