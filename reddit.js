@@ -39,7 +39,7 @@
               callback && callback(null, rdata);
             }
           } else {
-            callback && callback({message:"Undefined location"}, null);
+            callback && callback({message:"Incorrect URL"}, null);
           }
         });
       }).on("error", function(e) {
