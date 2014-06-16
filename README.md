@@ -1,7 +1,7 @@
 reddit.js
 =========
 
-reddit json feed reader for nodejs
+reddit reader for nodejs
 
 Usage
 -------
