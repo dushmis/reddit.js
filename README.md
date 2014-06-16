@@ -26,7 +26,8 @@ var reddit = require("./reddit");
 });
 ```
 
-prints
+
+
 Starbucks offers workers free college tuition - (link - http://www.usatoday.com/story/news/nation/2014/06/16/starbucks-free-college-tuition/10569971/)
 No more fillings as dentists reveal new tooth decay treatment - (link - http://www.theguardian.com/society/2014/jun/16/fillings-dentists-tooth-decay-treatment?CMP=fb_gu)
 F1 Legend Michael Schumacher is awake and out of hospital - (link - http://www.bbc.co.uk/news/world-europe-27868787)
