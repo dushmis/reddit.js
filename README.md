@@ -17,6 +17,7 @@ Example 2
 ---------
 
 ```
+//latest news..
 var reddit = require("./reddit");
 (new reddit({limit:5})).get("news", function(err,data) {
 	data.data.children && data.data.children.forEach(function(result){
