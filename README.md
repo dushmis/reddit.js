@@ -6,24 +6,24 @@ reddit json feed reader for nodejs
 Usage
 -------
 
-`
+```
 (new reddit({limit:5})).get("stories", function(err,data) {
   console.log(data);
 });
-`
+```
 
 
 Example 2
 ---------
 
-`
+```
 var reddit = require("./reddit");
 (new reddit({limit:5})).get("news", function(err,data) {
 	data.data.children && data.data.children.forEach(function(result){
 		console.log(result.data.title + " - (link - " + result.data.url + ")" );
 	});
 });
-`
+```
 
 prints
 Starbucks offers workers free college tuition - (link - http://www.usatoday.com/story/news/nation/2014/06/16/starbucks-free-college-tuition/10569971/)
